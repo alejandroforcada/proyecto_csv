@@ -61,6 +61,14 @@ class Ordinadors
         return $this->id;
     }
 
+    public function setId(?int $Id): static
+    {
+        $this->Id = $Id;
+
+        return $this;
+    }
+   
+
     public function getNom(): ?string
     {
         return $this->Nom;
@@ -230,4 +238,6 @@ class Ordinadors
 
         return $this;
     }
+
+    
 }
