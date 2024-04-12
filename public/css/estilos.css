@@ -1,0 +1,50 @@
+/* Hoja de estilos */
+
+body{
+    margin: 1em auto;
+    color:grey;
+    
+}
+
+h1{
+    font-size: 24px;
+
+}
+
+/* Estilos de la tabla, lo mas notable es que la caja no tien lado izquierdo ni superior
+    la última celda tampoco tiene lado derecho */
+table{
+    border-width:1px;
+    border:1px;
+    border-color: grey;
+    padding: 10px;
+   
+    
+}
+
+th{
+    color:white;
+    background-color: grey;
+    border-radius: 50px;
+    border: 0em;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+td{
+    border-style: solid;
+    color: grey;
+    border-width: 1px;
+    border-left: 0px;
+    border-top: 0px;
+}
+
+.lado_izquierdo{
+    border-left: 0em;
+}
+.lado_derecho{
+    border-right: 0em;
+}
+
+#contenido{
+    padding: 20px;
+}
