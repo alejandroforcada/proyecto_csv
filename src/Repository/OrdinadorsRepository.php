@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Ordinadors;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @extends ServiceEntityRepository<Ordinadors>
@@ -20,6 +21,32 @@ class OrdinadorsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Ordinadors::class);
     }
+
+    //query de los 20 primeros resultados segun la pagina
+    public function paginate($dql,$page, $limit )
+{
+    $paginator = new Paginator($dql);
+
+    $paginator->getQuery()
+    // a partir del numero de pagina y el limite crea las paginas
+        ->setFirstResult($limit * ($page - 1)) // Offset
+        ->setMaxResults($limit); // Limit
+
+    return $paginator;
+}
+
+//creamos la query
+public function getAllPers($currentPage, $limit )
+{
+    
+    $query = $this->createQueryBuilder('p')
+        ->getQuery();
+
+
+    $paginator = $this->paginate($query, $currentPage, $limit);
+
+    return array('paginator' => $paginator, 'query' => $query);
+}
 
 //    /**
 //     * @return Ordinadors[] Returns an array of Ordinadors objects

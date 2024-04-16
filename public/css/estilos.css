@@ -5,6 +5,9 @@ body{
     color:grey;
     
 }
+#contenido{
+    padding: 20px;
+}
 
 h1{
     font-size: 24px;
@@ -45,6 +48,3 @@ td{
     border-right: 0em;
 }
 
-#contenido{
-    padding: 20px;
-}

@@ -8,22 +8,43 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Ordinadors;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 class FuncionalidadesController extends AbstractController
 {
     // Ruta de la página principal
 
     #[Route('/', name: 'index')]
-    public function index(ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
-    {
-        //busqueda de todos los datos en la BB.DD
-        $repository = $entityManager->getRepository(Ordinadors::class);
-        $ordenadors = $repository->findAll();
-        // renderización de la plantilla
-            return $this->render('funcionalidades/index.html.twig', [
-                    'ordenadors' => $ordenadors,
-                ]);
-    }
+    public function index(Request $request,ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
+{
+  //utilizamos Reuest para acceder a la variable current page
+  $currentPage = $request->query->getInt('currentPage', 1);
+  //numeros por página
+  $limit = 20;
+  //llamaos ak metodo getAllpers en el repositorio
+  $Ordinadors = $entityManager->getRepository(Ordinadors::class)->getAllPers($currentPage, $limit);
+  $OrdinadorsResultado = $Ordinadors['paginator'];
+  $OrdinadorsQueryCompleta =  $Ordinadors['query'];
+
+  //numero máximo de páginas
+  $maxPages = ceil($Ordinadors['paginator']->count() / $limit);
+
+  //envimaos los datos a la plantilla
+  return $this->render('funcionalidades/index.html.twig', array(
+        'ordenadors' => $OrdinadorsResultado,
+        'maxPages'=>$maxPages,
+        'thisPage' => $currentPage,
+        'all_items' => $OrdinadorsQueryCompleta
+    ) );
+}
+    
+
+
+
+
+
+
+
 
     // Ruta para añadir el csv del tipo ordinador (normal) a la base de datos
     #[Route('/ordinador', name: 'ordinadors')]

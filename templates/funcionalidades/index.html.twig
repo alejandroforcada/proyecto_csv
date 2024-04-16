@@ -51,5 +51,40 @@
         <tr>
         {% endfor %}
     </table>
+    
+<! -- Html de el paginador -->
+    {% if maxPages > 1 %}
+    <ul>
+        {%if thisPage > 1 %}
+            
+                <a href="{{ path('index', {currentPage: thisPage-1 }) }}">«</a>
+            
+        {% endif %}
+
+        {% if thisPage < maxPages-3%}
+        {% for i in thisPage..thisPage+4 %}
+            
+                <a href="{{ path('index', {currentPage: i}) }}">{{ i }}</a>
+            
+        {% endfor %}
+                ..
+                <a href="{{ path('index', {currentPage: maxPages}) }}">{{ maxPages }}</a>
+        {% else %}
+                <a href="{{ path('index', {currentPage: 1}) }}">{{ 1 }}</a>
+                ..
+                
+        {% for i in thisPage..maxPages %}
+            <a href="{{ path('index', {currentPage: i}) }}">{{ i }}</a>
+        {% endfor %}
+        {% endif %}
+        
+        {%if thisPage < maxPages %}
+            
+                <a href="{{ path('index', {currentPage: thisPage+1 }) }}">»</a>
+            
+        {% endif %}
+    </ul>
+{% endif %}
+
 </div>
 {% endblock %}
