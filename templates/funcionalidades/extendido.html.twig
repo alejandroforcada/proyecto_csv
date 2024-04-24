@@ -9,13 +9,13 @@
 
 
     <! -- botones de funcionalidad para añadir y borrar datos --> 
-   <div>
+      <div>
 Ordenadores
   {{ form_start(formulario) }}
   {{ form_end(formulario) }}
 </div>
 Mifi
-<div >
+<div>
   {{ form_start(formularioMifi) }}
   {{ form_end(formularioMifi) }}
 </div>
@@ -65,42 +65,23 @@ Mifi
     <ul>
         {%if thisPage > 1 %}
             
-                <a href="{{ path('index', {currentPage: thisPage-1 }) }}">«</a>
+                <a href="{{ path('extendido', {currentPage: thisPage-1 }) }}">«</a>
             
         {% endif %}
 
-        {% if thisPage < 4 %}
         
-        {% for i in 1..thisPage+4 %}
+        {% for i in 1..maxPages %}
             
-                <a href="{{ path('index', {currentPage: i}) }}">{{ i }}</a>
+                <a href="{{ path('extendido', {currentPage: i}) }}">{{ i }}</a>
             
         {% endfor %}
-                ..
-                <a href="{{ path('index', {currentPage: maxPages}) }}">{{ maxPages }}</a>
-        {% elseif thisPage < maxPages - 4 %}
-                <a href="{{ path('index', {currentPage: 1}) }}">{{ 1 }}</a>
-                ..
-                
-        {% for i in thisPage -3 ..thisPage +3 %}
-            <a href="{{ path('index', {currentPage: i}) }}">{{ i }}</a>
-        {% endfor %}
-            ..
-            <a href="{{ path('index', {currentPage: maxPages}) }}">{{ maxPages }}</a>
-        {% else %}
-            <a href="{{ path('index', {currentPage: 1}) }}">{{ 1 }}</a>
-            ..
-            {% for i in thisPage -3 ..maxPages %}
-            <a href="{{ path('index', {currentPage: i}) }}">{{ i }}</a>
-            {% endfor %}
-        {% endif %}
-        
+                    
         {%if thisPage < maxPages %}
             
-                <a href="{{ path('index', {currentPage: thisPage+1 }) }}">»</a>
+                <a href="{{ path('extendido', {currentPage: thisPage+1 }) }}">»</a>
             
         {% endif %}
-        <a href="{{ path('extendido', {currentPage: thisPage }) }}">Extendido</a>
+                <a href="{{ path('extendido', {currentPage: thisPage }) }}">Compacto</a>
     </ul>
 {% endif %}
 
