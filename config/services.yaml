@@ -25,3 +25,5 @@ services:
 parameters:
     csv_directory: '%kernel.project_dir%/public/csv'
     portfolio_directory: '%kernel.project_dir%/public/csv'
+    images_directory: '%kernel.project_dir%/public/images/'
+    

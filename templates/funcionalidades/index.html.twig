@@ -2,7 +2,7 @@
 
 
 {% block body %}
-
+<div="todo">
 <div class="example-wrapper">
     <div id="contenido">
     <h1>Búsqueda de Equipos Informáticos I.E.S El Caminàs</h1>
@@ -14,16 +14,20 @@ Ordenadores
   {{ form_start(formulario) }}
   {{ form_end(formulario) }}
 </div>
-Mifi
-<div >
-  {{ form_start(formularioMifi) }}
-  {{ form_end(formularioMifi) }}
-</div>
+
     <a href="{{ path('borrar')}}" >Borrar</a>
 
+
+    <a href="{{path('limpiar')}}">Limpiar</a>
+    <div id="guardar">
+     {{ form_start(formularioTexto) }}
+     {{ form_end(formularioTexto) }}
+    </div>
     
     <! -- La tabla con la base de datos --> 
+    <div id="tabla">
     <table>
+    
         <tr>
             <th class="lado_izquierdo"> Nom </th>
             <th> Entitat </th>
@@ -40,9 +44,18 @@ Mifi
             <th> GVA - Espai Destí </th>
             <th class="lado_derecho">GVA - Descripció Espai Destí</th>
         <tr>
+        {% set index = 0 %}
         {% for ordenador in ordenadors %}
+            
+        
         <tr>
-            <td class="lado_izquierdo"> {{ordenador.Nom}} </td>
+            <td class="lado_izquierdo">
+            {% if formulariocheckbox[loop.index0]=="Verdadero" %}
+            <a href="{{ path('verdadero', {currentPage: thisPage, id:ordenador.Id, tipo:0}) }}"><img src="{{asset('images/verdadero.png')}}" alt="Verdadero" height="15px" width="15px"></a>
+            {% else %}
+            <a href="{{ path('falso', {currentPage: thisPage, id:ordenador.Id, tipo:0 }) }}"><img src="{{asset('images/falso.png')}}" alt="Falso" height="15px" width="15px"></a>
+            {% endif %}
+            {{ordenador.Nom}} </td>
             <td> {{ordenador.Entitat}} </td>
             <td> {{ordenador.CodiInventari}} </td>
             <td> {{ordenador.Estat}} </td>
@@ -59,6 +72,7 @@ Mifi
         <tr>
         {% endfor %}
     </table>
+    </div>
     
 <! -- Html de el paginador -->
     {% if maxPages > 1 %}
@@ -104,5 +118,6 @@ Mifi
     </ul>
 {% endif %}
 
+</div>
 </div>
 {% endblock %}

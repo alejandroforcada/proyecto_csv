@@ -48,20 +48,19 @@ public function getAllPers($currentPage, $limit )
     return array('paginator' => $paginator, 'query' => $query);
 }
 
-//    /**
-//     * @return Ordinadors[] Returns an array of Ordinadors objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+  
+   
+    public function findElegidos(): array
+    {
+      return $this->createQueryBuilder('o')
+          ->select('o.Nom, o.Entitat, o.Codi_inventari, o.Estat, o.Tipus, o.Codi_article, o.Descripcio_codi_article, o.Numero_serie, o.Fabricant, o.Model, o.Sistema_operatiu_nom, o.Sistema_operatiu_versio, o.Espai_desti, o.Descripcio_espai_desti')
+          ->andWhere('o.elegido = :val')
+          ->setParameter('val', 1)
+          ->orderBy('o.id', 'ASC')
+          ->getQuery()
+          ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Ordinadors
 //    {

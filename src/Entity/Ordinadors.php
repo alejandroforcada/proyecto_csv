@@ -56,6 +56,9 @@ class Ordinadors
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Descripcio_espai_desti = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $elegido = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -235,6 +238,18 @@ class Ordinadors
     public function setDescripcioEspaiDesti(?string $Descripcio_espai_desti): static
     {
         $this->Descripcio_espai_desti = $Descripcio_espai_desti;
+
+        return $this;
+    }
+
+    public function isElegido(): ?bool
+    {
+        return $this->elegido;
+    }
+
+    public function setElegido(?bool $elegido): static
+    {
+        $this->elegido = $elegido;
 
         return $this;
     }
