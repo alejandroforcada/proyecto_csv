@@ -1,12 +1,19 @@
 /* Hoja de estilos */
 
 body{
-    margin: 1em auto;
+    margin: 0 auto;
     color:grey;
+    width: 100%;
+    overflow-x: hidden;
     
+    
+}
+#todo{
+    width: 1400px;
 }
 #contenido{
     padding: 20px;
+    
 }
 
 h1{
@@ -21,8 +28,14 @@ table{
     border:1px;
     border-color: grey;
     padding: 10px;
+    
    
     
+}
+#tabla{
+    width: 1325px;
+    
+    overflow:scroll;
 }
 
 th{
@@ -46,5 +59,10 @@ td{
 }
 .lado_derecho{
     border-right: 0em;
+}
+#guardar{
+    position: relative;
+    left: 850px;
+    bottom: 60px;
 }
 
